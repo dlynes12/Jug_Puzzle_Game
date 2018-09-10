@@ -1,0 +1,7 @@
+Congratulations on completing the first lab of CSC207H5! You are now a master of Git, Java, Unix, and some Unix Tools...
+
+Just kidding LOL.
+
+You will however have more experience in all of those things at the end of this course than you did when you came in. Look around some of the files we have provided for you in the Lab01 directory and see what they do. Play around with them to your hearts content. You can even change them up to your liking. Soon you too will be able to create programs just like those ones. Of course the programs you write will have cleaner code and be able to do many more advanced things.
+
+See you in lecture on Tuesday and next week in Lab!
