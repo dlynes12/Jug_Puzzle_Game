@@ -1,0 +1,28 @@
+Testing a can of soda
+RootBeer closed 250
+isOpen=false
+Sipping 0
+RootBeer closed 250
+Gulping 0
+RootBeer closed 250
+Opening 
+isOpen=true
+RootBeer open 250
+Sipping 10
+RootBeer open 240
+Gulping 50
+RootBeer open 190
+Sipping 10
+RootBeer open 180
+Gulping 50
+RootBeer open 130
+Gulping 50
+RootBeer open 80
+Gulping 50
+RootBeer open 30
+Gulping 30
+RootBeer open 0
+Sipping 0
+RootBeer open 0
+Gulping 0
+RootBeer open 0
