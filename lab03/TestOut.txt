@@ -1,0 +1,60 @@
+Testing a can of soda
+RootBeer closed 250
+isOpen=false
+Sipping 0
+RootBeer closed 250
+Gulping 0
+RootBeer closed 250
+Opening 
+isOpen=true
+RootBeer open 250
+Sipping 10
+RootBeer open 240
+Gulping 50
+RootBeer open 190
+Sipping 10
+RootBeer open 180
+Gulping 50
+RootBeer open 130
+Gulping 50
+RootBeer open 80
+Gulping 50
+RootBeer open 30
+Gulping 30
+RootBeer open 0
+Sipping 0
+RootBeer open 0
+Gulping 0
+RootBeer open 0
+Testing a person interacting with a can of soda
+Joe is sipping from the can of soda
+I am Joe, and I am very thirsty
+Raspberry closed 250
+Opening
+Joe is sipping from the can of soda
+I am Joe, and I am very thirsty
+Raspberry open 240
+Joe is sipping from the can of soda
+I am Joe, and I am very thirsty
+Raspberry open 230
+Joe is gulping from the can of soda
+I am Joe, and I am very thirsty
+Raspberry open 180
+Joe is gulping from the can of soda
+I am Joe, and I am very thirsty
+Raspberry open 130
+Joe is gulping from the can of soda
+I am Joe, and I am very thirsty
+Raspberry open 80
+Joe is gulping from the can of soda
+I am Joe, and I am thirsty
+Raspberry open 30
+Joe is gulping from the can of soda
+I am Joe, and I am thirsty
+Raspberry open 0
+Joe is gulping from the can of soda
+I am Joe, and I am thirsty
+Raspberry open 0
+Joe is taking 4 gulps from a new can of soda
+I am Joe, and I am satisfied
+Coke open 50
