@@ -19,7 +19,7 @@ public class Scenario {
 		SodaCan Jacks1Soda = new SodaCan("RootBeer");
 		SodaCan Jacks2Soda = new SodaCan("GingerAle");
 
-		SodaCan Jills1Soda = new SodaCan("Cherry");
+		SodaCan Jills1Soda = new SodaCangit ("Cherry");
 		SodaCan Jills2Soda = new SodaCan("Grape");
 
 		Jacks1Soda.open();

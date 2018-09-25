@@ -31,7 +31,7 @@ public class Person {
      * @param s the can of soda this will gulp from
      */
     public void gulpFrom(SodaCan s){
-        s.gulp();
+        returns.gulp();
     }
 
     /**
