@@ -12,6 +12,42 @@
  * Finally, they check the amount available in all of the cans.
  */
 public class Scenario {
+	public Scenario() {
+		Person Jack = new Person("Jack");
+		Person Jill = new Person("Jill");
+		
+		SodaCan Jacks1Soda = new SodaCan("RootBeer");
+		SodaCan Jacks2Soda = new SodaCan("GingerAle");
 
+		SodaCan Jills1Soda = new SodaCan("Cherry");
+		SodaCan Jills2Soda = new SodaCan("Grape");
 
+		Jacks1Soda.open();
+		Jill.gulpFrom(Jacks1Soda);
+		Jill.gulpFrom(Jacks1Soda);
+		Jill.gulpFrom(Jacks1Soda);
+		Jill.gulpFrom(Jacks1Soda);
+		Jill.gulpFrom(Jacks1Soda);
+		Jill.getThirstStatus();
+		
+		Jills1Soda.open();	
+		Jill.gulpFrom(Jills1Soda);
+		Jill.gulpFrom(Jills1Soda);
+		Jill.gulpFrom(Jills1Soda);
+
+		Jack.sipFrom(Jills1Soda);
+		Jills1Soda.getAmount();
+
+		Jills2Soda.open();
+
+		Jack.gulpFrom(Jills2Soda);
+		Jack.gulpFrom(Jills2Soda);
+		Jack.sipFrom(Jills2Soda);
+
+		Jacks1Soda.getAmount();
+		Jacks2Soda.getAmount();
+		Jills1Soda.getAmount();
+		Jills1Soda.getAmount();
+
+	}
 }

@@ -6,40 +6,79 @@
  * An opened can can not be closed.
  */
 public class SodaCan {
+    private String type;
+    private int amount;
+    private boolean isOpen;
+    /**
+     * Construct a new SodaCan of the specified type.
+     * The new can has 250 units in it, and is closed.
+     * @param t the type of soda, for example "RootBeer", "Coke", "Cherry"
+     */
+    public SodaCan(String type){
+        this.type = type;
+        this.amount = 250;
+        this.isOpen = false;
+    }
 
-	/**
-	 * Construct a new SodaCan of the specified type.
-	 * The new can has 250 units in it, and is closed.
-	 * @param t the type of soda, for example "RootBeer", "Coke", "Cherry"
-	 */
+    public void open(){
+        this.isOpen = true;
+    }
 
-        /**
-         * open this SodaCan
-         */
+    public boolean isOpen(){
+        return this.isOpen;
+    }
 
-	/**
-	 * @return whether this is open
-	 */
-	
-        /**
-         * remove up to 10cc of soda from this, provided this is open
-         * @return the amount of soda actually removed
-         */
+    public int sip(){
+        if (this.isOpen) {
+		if (this.amount - 10 > 0){
+            this.amount =- 10;
+            return amount;
+		}
+		else {
 
-        /**
-         * remove up to 50cc of soda from this, provided this is open
-         * @return the amount of soda actually removed
-         */
-
-        /**
-         * @return the amount of soda left in this
-         */
-
-        /**
-         * @return a string representation of this
-         */
-        public String toString(){
-		String openString = (this.isOpen)?"open":"closed";
-		return this.type+" "+openString+" "+this.amount;
+		this.amount = 0;
+		return this.amount;
+		}
         }
+        else {System.out.println("The drink isn't opened");
+        return 0;}
+
+    }
+
+
+    /**
+     * remove up to 50cc of soda from this, provided this is open
+     * @return the amount of soda actually removed
+     */
+    public int gulp(){
+        if (this.isOpen) {
+		if (this.amount - 50 > 0){
+            this.amount =- 50;
+            return amount;
+		}
+		else {
+
+		this.amount = 0;
+		return this.amount;
+		}
+        }
+        else {System.out.println("The drink isn't opened");
+        return 0;}
+
+    }
+
+    /**
+     * @return the amount of soda left in this
+     */
+    public int getAmount(){
+        return this.amount;
+    }
+
+    /**
+     * @return a string representation of this
+     */
+    public String toString(){
+        String openString = (this.isOpen)?"open":"closed";
+        return this.type+" "+openString+" "+this.amount;
+    }
 }
