@@ -22,7 +22,7 @@ public class Circle extends Shape {
 	 * @param r the desired radius
 	 * @param x the desired x coordinate
 	 * @param y the desired x coordinate
-	 */
+	 */	
 	public Circle(String c, int radius, int x, int y) {
 		super(c, x, y); // Tell the Shape
 		setRadius(radius);

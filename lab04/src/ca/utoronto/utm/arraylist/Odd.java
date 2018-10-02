@@ -10,8 +10,12 @@ public class Odd {
 	 */
 	public static ArrayList<Integer> odds(int n) {
 		// See https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
-		ArrayList<Integer> oddNumbers=null;
-		
+		ArrayList<Integer> oddNumbers= new ArrayList<Integer>();
+		for(int i=0;i<n;i++) {
+			if(i%2!=0) {
+				oddNumbers.add(i);
+			}
+		}
 		return oddNumbers;
 	}
 
