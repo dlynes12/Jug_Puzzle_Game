@@ -1,6 +1,7 @@
 package ca.utoronto.utm.assignment1.q1;
 import java.io.*;
 import java.util.*;
+import Jug.*;
 /**
  * @author csc207student
  * This class allows a console user to play an instance of JugPuzzle.
