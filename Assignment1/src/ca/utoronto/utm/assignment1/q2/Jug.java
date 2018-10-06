@@ -1,4 +1,4 @@
-package q1;
+package q2;
 
 public class Jug {
     public int level;
