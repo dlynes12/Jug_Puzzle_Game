@@ -20,9 +20,9 @@ public class JugPuzzle extends Puzzle {
 
     public JugPuzzle() {
         this.jugs = new Jug[3];
-        jugs[0] = new Jug(0,8,8);
-        jugs[1] = new Jug(1,0,5);
-        jugs[2] = new Jug(2,0,3);
+        this.jugs[0] = new Jug(0,8,8);
+        this.jugs[1] = new Jug(1,0,5);
+        this.jugs[2] = new Jug(2,0,3);
 
     }
     
@@ -48,27 +48,26 @@ public class JugPuzzle extends Puzzle {
         }else {
         	jugs[j2].level = jugs[j2].capacity;
         	jugs[j1].level -= j2_num;
-        }
-     public 
-  		 
+        }  		 
         
     }
     public String toString() {
-    	return (moves + " " + jugs[0] + " " + jugs[1] + " " + jugs[2]);
+    	return (moves + " " + this.jugs[0] + " " + this.jugs[1] + " " + this.jugs[2]);
     }
 
 	public void nextStates(States states) {
 		// TODO Auto-generated method stub
 		for(Move move: allPossibleMoves){
- 			 tempPuzzle = this.copy()
+ 			 tempPuzzle = this.copy();
  		     tempPuzzle.move()
  		     states.add(tempPuzzle, move)
  		      }
  		  }
 
-	private JugPuzzle copy(JugPuzzle p) {
-		System.out.println(p.jugs.clone());
-		JugPuzzle pCopy = new JugPuzzle(p.jugs[0]);
+	private JugPuzzle copy() {
+		JugPuzzle pCopy = new JugPuzzle();
+		pCopy.jugs = this.jugs;
+		return pCopy;
 	}
 		
 }
