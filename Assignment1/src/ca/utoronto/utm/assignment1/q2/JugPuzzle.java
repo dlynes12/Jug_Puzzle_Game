@@ -1,25 +1,70 @@
 package ca.utoronto.utm.assignment1.q2;
+
+import ca.utoronto.utm.assignment1.puzzle.Puzzle;
+import ca.utoronto.utm.assignment1.puzzle.States;
+import ca.utoronto.utm.assignment1.puzzle.Move;
+import ca.utoronto.utm.assignment1.q2.Jug;
+
 /**
  * 
- * @author csc207student 
+ * @param <Jug>
+ * @lynessdan
  *
  */
-public class JugPuzzle {
-    private ca.utoronto.utm.assignment1.q2.Jug j1 = new ca.utoronto.utm.assignment1.q2.Jug(1,2);
-    private ca.utoronto.utm.assignment1.q2.Jug j2 = new ca.utoronto.utm.assignment1.q2.Jug(2,3);
-    private ca.utoronto.utm.assignment1.q2.Jug j3 = new ca.utoronto.utm.assignment1.q2.Jug(3,4);
+public class JugPuzzle extends Puzzle {
+   public int moves = 0;
+   public Jug[] jugs;
+   public Move[] allPossibleMoves;
+   public Puzzle tempPuzzle;
+   
 
-    public boolean isPuzzleSolved()
-    {
-        return true;
+    public JugPuzzle() {
+        this.jugs = new Jug[3];
+        jugs[0] = new Jug(0,8,8);
+        jugs[1] = new Jug(1,0,5);
+        jugs[2] = new Jug(2,0,3);
+
+    }
+
+    public boolean isPuzzleSolved() {
+        return (jugs[0].level == 4 && jugs[1].level == 4);
     }
 
     public int getMoves() {
-        return ca.utoronto.utm.assignment1.q1.Jug.moves;
+        return moves;
     }
 
-    public void move(ca.utoronto.utm.assignment1.q1.Jug a, ca.utoronto.utm.assignment1.q1.Jug b) {
-        a.
+    public void move(int j1, int j2) {
+        moves++;
+        int j2_num = jugs[j2].capacity - jugs[j2].level;
+        if (jugs[j1].level <= j2_num){
+            jugs[j2].level += jugs[j1].level;
+            jugs[j1].level = 0;
+        }else {
+        	jugs[j2].level = jugs[j2].capacity;
+        	jugs[j1].level -= j2_num;
+        }
+     
+  		 
+        
+    }
+    public String toString() {
+    	return (moves + " " + jugs[0] + " " + jugs[1] + " " + jugs[2]);
     }
 
+	public void nextStates(States states) {
+		// TODO Auto-generated method stub
+		for(Move move: allPossibleMoves){
+ 			 tempPuzzle = this.copy()
+ 		     tempPuzzle.move()
+ 		     states.add(tempPuzzle, move)
+ 		      }
+ 		  }
+
+	private JugPuzzle copy(JugPuzzle p) {
+		System.out.println(p.jugs.clone());
+		JugPuzzle pCopy = new JugPuzzle(p.jugs[0]);
+	}
+		
 }
+

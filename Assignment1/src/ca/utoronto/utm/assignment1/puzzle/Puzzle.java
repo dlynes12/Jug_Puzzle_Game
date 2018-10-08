@@ -31,10 +31,10 @@ public abstract class Puzzle {
 
 	public static void solve(Puzzle p) {
 		States previousStates=new States();
-		previousStates.add(p, null);
+		previousStates.add(p, null);  //precviousStates = {State(None, p, Null)}
 		
 		while(true) {
-			States nextStates=new States();
+			States nextStates=new States(); //states = {} 
 			for(State s: previousStates) {
 				if(s.getPuzzle().isPuzzleSolved()) {
 					printSolution(s);
@@ -51,6 +51,9 @@ public abstract class Puzzle {
 		}
 	}
 	
+	
+	
+		  
 	/**
 	 * Print out the sequence of moves needed to solve the puzzle.
 	 * @param s
