@@ -25,7 +25,12 @@ public class JugPuzzle extends Puzzle {
         jugs[2] = new Jug(2,0,3);
 
     }
-
+    
+    public Move[] allPossibleMoves() {
+		return allPossibleMoves;
+    	
+    	
+    }
     public boolean isPuzzleSolved() {
         return (jugs[0].level == 4 && jugs[1].level == 4);
     }
@@ -44,7 +49,7 @@ public class JugPuzzle extends Puzzle {
         	jugs[j2].level = jugs[j2].capacity;
         	jugs[j1].level -= j2_num;
         }
-     
+     public 
   		 
         
     }
