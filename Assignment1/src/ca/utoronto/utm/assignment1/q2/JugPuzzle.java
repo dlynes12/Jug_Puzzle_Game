@@ -39,8 +39,9 @@ public class JugPuzzle extends Puzzle {
         return moves;
     }
 
-    public void move(int j1, int j2) {
+    public void move(Move m) {
         moves++;
+        
         int j2_num = jugs[j2].capacity - jugs[j2].level;
         if (jugs[j1].level <= j2_num){
             jugs[j2].level += jugs[j1].level;
@@ -59,7 +60,8 @@ public class JugPuzzle extends Puzzle {
 		// TODO Auto-generated method stub
 		for(Move move: allPossibleMoves){
  			 tempPuzzle = this.copy();
- 		     states.add(tempPuzzle, move);
+ 		     tempPuzzle.move(move);
+ 		     states.add(tempPuzzle, move)
  		      }
  		  }
 
