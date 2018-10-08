@@ -59,8 +59,7 @@ public class JugPuzzle extends Puzzle {
 		// TODO Auto-generated method stub
 		for(Move move: allPossibleMoves){
  			 tempPuzzle = this.copy();
- 		     tempPuzzle.move()
- 		     states.add(tempPuzzle, move)
+ 		     states.add(tempPuzzle, move);
  		      }
  		  }
 
