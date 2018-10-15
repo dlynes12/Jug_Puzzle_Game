@@ -4,49 +4,49 @@ with Y or N indicating whether you are comfortable with the topic.
 If you are not comfortable, you shoudd probably review it for the test!
 This is not a complete list!! GUI programming won't be on the test.
 
-[YN] Java primitive types
-[YN] automatic converting between primitive types
-[YN] casting primitive types
-[YN] everything in Java has a type
-[YN] static methods
-[YN] references
-[YN] null pointer exception
+[Y] Java primitive types
+[Y] automatic converting between primitive types
+[Y] casting primitive types
+[Y] everything in Java has a type
+[N] static methods
+[N] references
+[N] null pointer exception
 [YN] The value of a reference, the value of a primitive
-[YN] what = means
-[YN] what == means
-[YN] Java is pass by value
-[YN] if, while, for
-[YN] scope of a variable
-[YN] shortcircuit boolean operators
-[YN] Basic OO-Java, this
-[YN] IS-A: what it means, UML and how it is expressed in Java
-[YN] HAS-A: what it means, UML and how it is expressed in Java
-[YN] RESPONDS-TO: what it means, UML and how it is expressed in Java
-[YN] git clone, add, commit, push, pull
-[YN] modifiers public, private, protected, no modifier
-[YN] modifier static vs no modifier
-[YN] Class design: protection on instance variables should be private unless ...
-[YN] Class design: protection on methods should is public when ...
-[YN] javadoc for classes
-[YN] javadoc for methods, annotations @param, @return
-[YN] building the javadoc
-[YN] Purpose of a class
-[YN] References and arrays
-[YN] What an import statement does
-[YN] What a package statement does
-[YN] Where to search for names within a class ie. i=7 vs this.i vs Balloon.i
-[YN] JUnit tests
-[YN] overloading methods
-[YN] overloading constructors and calling them this(....)
-[YN] inheritance: extends
-[YN] calling the superclass methods with super
-[YN] overriding: the search for names
-[YN] shadowing
-[YN] abstract classes and how to use them (extend and implement)
-[YN] interfaces (implement)
-[YN] how many classes can a class extend
-[YN] how many interfaces can a class implement
-[YN] Liskov Substitution Principle
-[YN] UML class diagrams 
-[YN] Building a UML diagram in eclipse
-[YN] Generics: ArrayList vs ArrayList<Balloon>
+[Y] what = means
+[Y] what == means
+[Y] Java is pass by value
+[Y] if, while, for
+[Y] scope of a variable
+[Y] shortcircuit boolean operators
+[Y] Basic OO-Java, this
+[Y] IS-A: what it means, UML and how it is expressed in Java
+[Y] HAS-A: what it means, UML and how it is expressed in Java
+[N] RESPONDS-TO: what it means, UML and how it is expressed in Java
+[Y] git clone, add, commit, push, pull
+[N] modifiers public, private, protected, no modifier
+[N] modifier static vs no modifier
+[N] Class design: protection on instance variables should be private unless ...
+[N] Class design: protection on methods should is public when ...
+[N] javadoc for classes
+[N] javadoc for methods, annotations @param, @return
+[N] building the javadoc
+[Y] Purpose of a class
+[N] References and arrays
+[Y] What an import statement does
+[Y] What a package statement does
+[Y] Where to search for names within a class ie. i=7 vs this.i vs Balloon.i
+[Y] JUnit tests
+[N] overloading methods
+[N] overloading constructors and calling them this(....)
+[Y] inheritance: extends
+[Y] calling the superclass methods with super
+[N] overriding: the search for names
+[N] shadowing
+[Y] abstract classes and how to use them (extend and implement)
+[Y] interfaces (implement)
+[Y] how many classes can a class extend
+[Y] how many interfaces can a class implement
+[Y] Liskov Substitution Principle
+[Y] UML class diagrams 
+[N] Building a UML diagram in eclipse
+[Y] Generics: ArrayList vs ArrayList<Balloon>
