@@ -1,0 +1,6 @@
+Explain how the puzzle package works and how you use
+it to solve your JugPuzzle. Your explanation should convince
+us that you understand inheritance, interfaces as well as how
+the code in solve uses these to solve any puzzle which correctly
+uses the framework.
+
