@@ -1,0 +1,52 @@
+We have covered the following topics so far. Please answer
+with Y or N indicating whether you are comfortable with the topic.
+
+If you are not comfortable, you shoudd probably review it for the test!
+This is not a complete list!! GUI programming won't be on the test.
+
+[YN] Java primitive types
+[YN] automatic converting between primitive types
+[YN] casting primitive types
+[YN] everything in Java has a type
+[YN] static methods
+[YN] references
+[YN] null pointer exception
+[YN] The value of a reference, the value of a primitive
+[YN] what = means
+[YN] what == means
+[YN] Java is pass by value
+[YN] if, while, for
+[YN] scope of a variable
+[YN] shortcircuit boolean operators
+[YN] Basic OO-Java, this
+[YN] IS-A: what it means, UML and how it is expressed in Java
+[YN] HAS-A: what it means, UML and how it is expressed in Java
+[YN] RESPONDS-TO: what it means, UML and how it is expressed in Java
+[YN] git clone, add, commit, push, pull
+[YN] modifiers public, private, protected, no modifier
+[YN] modifier static vs no modifier
+[YN] Class design: protection on instance variables should be private unless ...
+[YN] Class design: protection on methods should is public when ...
+[YN] javadoc for classes
+[YN] javadoc for methods, annotations @param, @return
+[YN] building the javadoc
+[YN] Purpose of a class
+[YN] References and arrays
+[YN] What an import statement does
+[YN] What a package statement does
+[YN] Where to search for names within a class ie. i=7 vs this.i vs Balloon.i
+[YN] JUnit tests
+[YN] overloading methods
+[YN] overloading constructors and calling them this(....)
+[YN] inheritance: extends
+[YN] calling the superclass methods with super
+[YN] overriding: the search for names
+[YN] shadowing
+[YN] abstract classes and how to use them (extend and implement)
+[YN] interfaces (implement)
+[YN] how many classes can a class extend
+[YN] how many interfaces can a class implement
+[YN] Liskov Substitution Principle
+[YN] UML class diagrams 
+[YN] Building a UML diagram in eclipse
+[YN] Generics: ArrayList vs ArrayList<Balloon>
