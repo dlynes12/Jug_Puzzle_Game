@@ -1,0 +1,62 @@
+1) Take a look at the class diagram and code for 
+   paint. The class diagram is in diagram.ucls
+   and in diagram.gif.
+
+   Identify the classes involved in the 
+
+   a) Factory Design Pattern
+
+      YOUR ANSWER GOES HERE
+
+   b) Strategy Design Pattern
+
+      YOUR ANSWER GOES HERE
+
+   c) Command Design Pattern
+
+      YOUR ANSWER GOES HERE
+
+   d) Which classes are observable. Which classes are
+      observers. Note that this is not included in the
+      class diagrams, so you will have to take a look at
+      the code.
+
+      Observable:
+
+      YOUR ANSWER GOES HERE
+
+      Observers are? What do they Observe?:
+
+      YOUR ANSWER GOES HERE
+
+2) Explain what happens in the code after each step in the following
+   sequence of events:
+
+   a) The user clicks the Circle button on the ShapeChooserPanel.
+
+      The button fires the handle event handler in the ShapeChooserPanel
+      which asks the ShapeManipulatorFactory for a CircleManipulatorStrategy
+      The CircleManipulatorStrategy is hooked up to to the PaintModel
+      so that the strategy can modify the PaintModel in response to mouse events.
+      This new CircleManipulatorStrategy is installed in the view
+      which in turn installs the strategy in the PaintPanel
+      so that now all PaintPanel mouse events are sent to the
+      new CircleManipulatorStrategy.
+
+   b) Next the user clicks in the Canvas on the PaintPanel.
+
+      YOUR ANSWER GOES HERE
+
+   c) Next the user drags the mouse across the Canvas in the PaintPanel.
+
+      YOUR ANSWER GOES HERE
+
+   d) Next the user clicks in the Canvas on the Paint Panel. 
+
+      YOUR ANSWER GOES HERE
+
+   e) Next the user clicks the Rectangle Button on the ShapeChooserPanel.
+
+      YOUR ANSWER GOES HERE
+
+
