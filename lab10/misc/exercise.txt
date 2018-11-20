@@ -6,15 +6,25 @@
 
    a) Factory Design Pattern
 
-      YOUR ANSWER GOES HERE
+      ShapeManipulationStrategy
+      ShapeManipulationFactor
 
    b) Strategy Design Pattern
 
-      YOUR ANSWER GOES HERE
+        ShapeManipulationStrategy
+        View
+        PaintModel
+        CircleManipulatorStrategy
+        SquiggleManipulatorStrategy
+        RectangleManipulatorStrategy
+
 
    c) Command Design Pattern
 
-      YOUR ANSWER GOES HERE
+        CircleCommand
+        RectangleCommand
+        PaintCommand
+        RectangleCommand
 
    d) Which classes are observable. Which classes are
       observers. Note that this is not included in the
@@ -24,10 +34,17 @@
       Observable:
 
       YOUR ANSWER GOES HERE
+      PaintPanel
+      PaintModel
+      shape
 
       Observers are? What do they Observe?:
 
       YOUR ANSWER GOES HERE
+
+      PaintModel - > Shape
+      PaintPanel - > PaintModel
+      PaintCommand - > PaintModel
 
 2) Explain what happens in the code after each step in the following
    sequence of events:
@@ -46,17 +63,37 @@
    b) Next the user clicks in the Canvas on the PaintPanel.
 
       YOUR ANSWER GOES HERE
+      The PaintPanel will call the handle method whioh will call the current strategy
+      to handle the event. since the current strategy is the Circle strategy it will
+      set up the nformation for a circle like set a point and initiate a circle
+      which goes up and calls Circle command which calls super up to PaintCommand.
 
    c) Next the user drags the mouse across the Canvas in the PaintPanel.
 
       YOUR ANSWER GOES HERE
+      as the user drags the mouse across the canvas
+      the CircleManipulator will calculate the radius continously and will set it and notify
+      the observes in the circle class.
 
    d) Next the user clicks in the Canvas on the Paint Panel. 
 
       YOUR ANSWER GOES HERE
+      again but with a new instance of a circle using the factory method
+      The PaintPanel will call the handle method whioh will call the current strategy
+      to handle the event. since the current strategy is the Circle strategy it will
+      set up the information for a circle like set a point and initiate a circle
+      which goes up and calls Circle command which calls super up to PaintCommand.
 
    e) Next the user clicks the Rectangle Button on the ShapeChooserPanel.
 
       YOUR ANSWER GOES HERE
+      The button fires the handle event handler in the ShapeChooserPanel
+            which asks the ShapeManipulatorFactory for a RectangleManipulatorStrategy
+            The RectangleManipulatorStrategy is hooked up to to the PaintModel
+            so that the strategy can modify the PaintModel in response to mouse events.
+            This new RectangleManipulatorStrategy is installed in the view
+            which in turn installs the strategy in the PaintPanel
+            so that now all PaintPanel mouse events are sent to the
+            new RectangleManipulatorStrategy.
 
 
