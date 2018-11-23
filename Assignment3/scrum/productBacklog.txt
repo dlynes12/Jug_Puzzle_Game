@@ -1,0 +1,79 @@
+# User Stories/Bugs (add as appropriate), modify at each Sprint Planning Meeting
+# If a USER STORY is large, break it into smaller user stories.
+
+--------------------------------------------------------------------------
+TYPE     : USER STORY 3.1
+NAME     : Save Feature
+OWNER    :
+PRIORITY : 1
+ESTIMATE :
+AS A     : user
+I WANT   : a user interface that allows me to specify where to save the
+Paint, then saves all Paint commands to a file.
+SO THAT  :
+IMPL DTL : Implementation details for the save feature:
+
+This amounts to saving the command list to a file according
+to the Paint Save File Format.
+Do this using what you have learned in class about FileIO.
+You can find the format of the save file in the
+Assignment3 project under Assignment3/paintSaveFileFormat.txt.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY 3.2
+NAME     : Load a Saved File
+OWNER    :
+PRIORITY : 2
+ESTIMATE :
+AS A     : user
+I WANT   : the ability to open previously saved Paint programs. A file dialog
+should appear, allowing me to choose the file to load. If the file is not in
+the correct format, provide an appropriate error message.
+SO THAT  :
+IMPL DTL : Implementation details for the load feature:
+
+Read a file in Paint Save File Format, being careful to parse
+each line using an appropriate regular expression/expressions. 
+You can find the format of the save file in the
+Assignment3 project under Assignment3/paintSaveFileFormat.txt.
+
+The result of the execution of the load method should modify
+the given PaintModel. Some ShapeCommands will require careful parsing. 
+For example, you will have to walk
+through a squiggle to properly parse it using Patterns and groups.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : BUG 3.3
+NAME     : Improve architecture for save
+OWNER    :
+PRIORITY : 3
+ESTIMATE :
+AS A     : 
+I WANT   :
+DEPENDSON: USER STORY 3.1
+IMPL DTL : 
+
+Now that USER STORY 3.1 is in place...
+
+Code to save may not be simple. To simplify it, add the Visitor
+Design pattern to the Model, then move all code relating to saving
+the model to an appropriate Visitor.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : BUG 3.4
+NAME     : Improve architecture for drawing
+OWNER    :
+PRIORITY : 4
+ESTIMATE :
+AS A     : 
+I WANT   :
+DEPENDSON: Bug 3.3
+IMPL DTL : 
+
+With BUG 3.3 in place, we can now move code to draw each part of the model
+to an appropriate Visitor. 
+--------------------------------------------------------------------------
+
+# COMPLETED USER STORIES/BUGS BELOW ###########################################
+
+# OMITTED USER STORIES/BUGS BELOW   ###########################################
