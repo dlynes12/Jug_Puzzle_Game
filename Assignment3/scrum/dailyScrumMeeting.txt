@@ -13,14 +13,14 @@ Nov 24, 2017
 
 
 Nov 25, 2017
-	Yesterday :
+	Yesterday : Worked on making the patterns for each shape and the begining and end of the file
 	Today     :
-	Obstacles :
+	Obstacles :Understanding how to properly use serialization and what it is.
 
 Nov 26, 2017
 	Yesterday :
-	Today     :
-	Obstacles :
+	Today     : Put the rest of the patterns in FileParser and put setup how the switch's work.
+	Obstacles : Trying to get my regex patterns to match properly
 	
 Nov 27, 2017
 	Yesterday :

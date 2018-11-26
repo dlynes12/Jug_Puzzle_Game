@@ -1,8 +1,6 @@
 package ca.utoronto.utm.paint;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.PrintWriter;
+import java.io.*;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +12,7 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 
 public class View implements EventHandler<ActionEvent> {
 
@@ -135,10 +134,15 @@ public class View implements EventHandler<ActionEvent> {
 
 			if (file != null) {
 				System.out.println("Opening: " + file.getName() + "." + "\n");
-				// BufferedReader bufferedReader=null; // FIX THIS
-				PaintModel paintModel = new PaintModel();
-				// PaintFileParser parser = new PaintFileParser();
-				// parser.parse(bufferedReader,  paintModel);
+                BufferedReader bufferedReader= null;
+                try {
+                    bufferedReader = new BufferedReader(new FileReader(new File(file.getPath())));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                PaintModel paintModel = new PaintModel();
+				PaintFileParser parser = new PaintFileParser();
+				parser.parse(bufferedReader,  paintModel);
 				this.setPaintModel(paintModel);
 			} else {
 				System.out.println("Open command cancelled by user." + "\n");
