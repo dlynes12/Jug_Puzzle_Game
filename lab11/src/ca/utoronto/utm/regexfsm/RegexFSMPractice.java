@@ -50,6 +50,11 @@ public class RegexFSMPractice {
 	 * YOUR ANSWER GOES HERE
 	 * 
 	 */
+	String ex1 = new String("211dj:x dog end");
+	String ex2= new String("311dj:x elephant end");
+	String ex3 = new String("531dj:x cat end");
+	String ex4 = new String("811dj:x any word or character end");
+
 	
 	public static boolean recognizeSomethingRegex(String s) {
 		Pattern p = Pattern.compile("^[0-9]+[aeiou]{3}:(x|y|z)(.*)end$");
@@ -73,6 +78,11 @@ public class RegexFSMPractice {
 	 * YOUR ANSWER GOES HERE
 	 * 
 	 */
+
+	String FSMex1 = new String("1234567890");
+	String FSMex2= new String("00000010");
+
+
 	public static boolean recognizeSomethingFSM(String s) {
 		char [] c=s.toCharArray();
 		int len=s.length();
@@ -123,8 +133,8 @@ public class RegexFSMPractice {
 	public static boolean recognizeWellFedRegex(String s) {
 		
 		// COMPLETE THIS METHOD
-		
-		Pattern p = Pattern.compile("");
+
+		Pattern p = Pattern.compile("^[0-8]*(7)$");
 		Matcher m = p.matcher(s);
 		return m.matches();
 	}
@@ -142,17 +152,26 @@ public class RegexFSMPractice {
 		char [] c=s.toCharArray();
 		int len=s.length();
 		
-		boolean retVal=true;
+		boolean retVal=false;
 		
 		int n=0;
 		int state=0; // Start out in the initial state
 		while(n<len){
 			switch(state){	
 				case 0:
+					if (c[n] >= '0' && c[n] <= '6') {
+						break;
+					}
+					else if (c[n] == '8') {break;}
+					else if (c[n] == '7') {retVal=true;}
+
+					else {
+						state=2;
+						break;
+					}
 					break;
 				case 1:
-					break;
-				case 2:
+					retVal = false;
 					break;
 			}
 			n=n+1;
