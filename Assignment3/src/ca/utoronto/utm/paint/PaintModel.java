@@ -10,7 +10,9 @@ import javafx.scene.canvas.GraphicsContext;
 public class PaintModel extends Observable implements Observer {
 
 	public void save(PrintWriter writer) {
-		
+		for (PaintCommand c : this.commands) {
+		    writer.write(c.toString());
+        }
 	}
 	public void reset(){
 		for(PaintCommand c: this.commands){

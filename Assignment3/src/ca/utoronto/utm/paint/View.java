@@ -172,6 +172,9 @@ public class View implements EventHandler<ActionEvent> {
 	 * @param paintModel
 	 */
 	public static void save(PrintWriter writer, PaintModel paintModel) {
-		
-	}
+	    writer.write("PaintSaveFileVersion1.0\n");
+		paintModel.save(writer);
+        writer.write("EndPaintSaveFile");
+
+    }
 }
