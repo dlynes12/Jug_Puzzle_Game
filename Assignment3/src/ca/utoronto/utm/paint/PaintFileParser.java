@@ -26,13 +26,14 @@ public class PaintFileParser {
 	/**
 	 * Below are Patterns used in parsing 
 	 */
-	private Pattern pFileStart=Pattern.compile("^\\s*P\\s*a\\s*i\\s*n\\s*t\\s*S\\s*a\\s*v\\s*e\\s*F\\s*i\\s*l\\s*e\\s*V\\s*e\\s*r\\s*s\\s*i\\s*o\\s*n\\s*1\\s*.\\s*0\\s*$");
-	private Pattern pFileEnd=Pattern.compile("^\\s*E\\s*n\\s*d\\s*P\\s*a\\s*i\\s*n\\s*t\\s*S\\s*a\\s*v\\s*e\\s*F\\s*i\\s*l\\s*e$");
-	private Pattern pCircleStart=Pattern.compile("^C\\s*i\\s*r\\s*c\\s*l\\s*e$");
-	private Pattern pColor=Pattern.compile("^C\\s*o\\s*l\\s*o\\s*r\\s*:\\s*[0-9,]*$");
-	private Pattern pRadius=Pattern.compile("^R\\s*a\\s*d\\s*i\\s*u\\s*s\\s*:[0-9,]$");
-	private Pattern pFill=Pattern.compile("^F\\s*i\\s*l\\s*l\\s*:[0-9,]$");
-	private Pattern pCircleEnd=Pattern.compile("^E\\s*n\\s*d\\s*C\\s*i\\s*r\\s*c\\s*l\\s*e\\s*$");
+	private Pattern pFileStart=Pattern.compile("^PaintSaveFileVersion1.0$");
+	private Pattern pFileEnd=Pattern.compile("^\\s*E\\s*n\\s*d\\s*P\\s*a\\s*i\\s*n\\s*t\\s*S\\s*a\\s*v\\s*e\\s*F\\s*i\\s*l\\s*e\\s*$");
+	private Pattern pCircleStart=Pattern.compile("^EndPaintSaveFile$");
+	private Pattern pColor=Pattern.compile("^\\d{1,3},\\d{1,3},\\d{1,3}$");
+	private Pattern pRadius=Pattern.compile("://d+$");
+	private Pattern pFillTrue=Pattern.compile("true$");
+	private Pattern pFillFalse=Pattern.compile("false$");
+	private Pattern pCircleEnd=Pattern.compile("^EndCircle$");
 	private Pattern pRectangleStart=Pattern.compile("^\\s*R\\s*e\\s*c\\s*t\\s*a\\s*n\\s*g\\s*l\\s*e\\s*$");
 	private Pattern pRectangleEnd=Pattern.compile("^\\s*E\\s*n\\s*d\\s*R\\s*e\\s*c\\s*t\\s*a\\s*n\\s*g\\s*l\\s*e\\s*$");
 	private Pattern pSquiggle=Pattern.compile("^\\s*S\\s*q\\s*u\\s*i\\s*g\\s*g\\s*l\\s*e\\s*$");
@@ -87,6 +88,7 @@ public class PaintFileParser {
 			this.lineNumber=0;
 			while ((l = inputStream.readLine()) != null) {
 				this.lineNumber++;
+				l = l.replaceAll(\\s+,"");
 				System.out.println(lineNumber+" "+l+" "+state);
 				switch(state){
 					case 0:
@@ -106,16 +108,14 @@ public class PaintFileParser {
 						if(m.matches()){
 							// ADD CODE!!!
                             state = 3;
-                            System.out.println("It's a start of a circle get ready bois");
+                            paintModel.addCommand(CircleCommand);
                             m=pColor.matcher(l);
                             if (m.matches()) {String c = inputStream.readLine();}
 
-
-                            String f = inputStream.readLine();
-                            String r = inputStream.readLine();
-
-
-
+                            while ((inputStream.readLine().toString().equals("EndCircle\n"));
+                            {
+								String r = inputStream.readLine();
+							}
                             break;
 						}m=pFileEnd.matcher(l);
 						if(m.matches()) {
