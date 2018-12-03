@@ -24,12 +24,14 @@ Nov 26, 2017
 	
 Nov 27, 2017
 	Yesterday :
-	Today     :
-	Obstacles :
+	Today     : Trying to understand what a fsm is and what it can be used for. Still am not sure but was able to think of it
+	            in a similar manner to a while loop with cases.
+	Obstacles : Understanding what a FSM (finite state machine)  is and how we can utilize it in this paint program.
 	
 Nov 28, 2017
 	Yesterday :
-	Today     :
+	Today     : Read over regex and what the various notations and symbols mean still find myself looking over the document
+	            for regex. Regex is used to find strings and is a very powerful tool.
 	Obstacles :
 	
 Nov 29, 2017
