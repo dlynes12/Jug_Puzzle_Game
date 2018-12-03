@@ -107,7 +107,8 @@ public class PaintFileParser {
 							// ADD CODE!!!
                             state = 3;
                             System.out.println("It's a start of a circle get ready bois");
-                            m=pColor.matcher(l);
+							//paintModel.addCommand(new CircleCommand());
+							m=pColor.matcher(l);
                             if (m.matches()) {String c = inputStream.readLine();}
 
 
@@ -134,8 +135,8 @@ public class PaintFileParser {
 						m=pRectangleStart.matcher(l);
 						if(m.matches()){
 							// ADD CODE!!!
-                            System.out.println("It's a start of a circle get ready bois");
-                            state=4;
+							//paintModel.addCommand(new RectangleCommand());
+							state=4;
 							break;
 						}m=pRectangleEnd.matcher(l);
 						if (m.matches()) {
@@ -146,6 +147,7 @@ public class PaintFileParser {
 						m=pSquiggle.matcher(l);
 						if(m.matches()){
 							// ADD CODE!!!
+							paintModel.addCommand(new SquiggleCommand());
 							state=5;
 							break;
 						}m=pSquiggleEnd.matcher(l);
