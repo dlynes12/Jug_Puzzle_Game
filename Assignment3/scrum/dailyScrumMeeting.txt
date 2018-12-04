@@ -56,8 +56,9 @@ Dec 2, 2017
 
 Dec 3, 2017
 	Yesterday :
-	Today     :
-	Obstacles :
+	Today     :I Created my new branch for reading and parsing,  managed to break up the cases to
+	            construct the shapes using the FSM.
+	Obstacles : Program will exit before finishing not sure why yet hoping I can resolve and fix this issue.
 
 Dec 4, 2017
 	Yesterday :
