@@ -15,6 +15,10 @@ public class CircleCommand extends PaintCommand {
 		this.setChanged();
 		this.notifyObservers();
 	}
+	public void setCentre(int x, int y){
+		Point p = new Point(x, y);
+		this.centre = p;
+	}
 	public int getRadius() { return radius; }
 	public void setRadius(int radius) { 
 		this.radius = radius; 

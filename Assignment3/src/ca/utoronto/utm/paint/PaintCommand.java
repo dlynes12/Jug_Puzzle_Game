@@ -22,6 +22,10 @@ public abstract class PaintCommand extends Observable {
 	public void setColor(Color color) {
 		this.color = color;
 	}
+
+	public void setColor(int r, int g, int b) {
+		this.color = Color.rgb(r, g, b);
+	}
 	public boolean isFill() {
 		return fill;
 	}

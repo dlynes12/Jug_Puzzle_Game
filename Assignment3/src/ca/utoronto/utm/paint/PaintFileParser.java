@@ -19,148 +19,173 @@ import java.util.regex.Pattern;
  *
  */
 public class PaintFileParser {
-	private int lineNumber = 0; // the current line being parsed
-	private String errorMessage =""; // error encountered during parse
-	private PaintModel paintModel;
+    private int lineNumber = 0; // the current line being parsed
+    private String errorMessage = ""; // error encountered during parse
+    private PaintModel paintModel;
 
-	/**
-	 * Below are Patterns used in parsing 
-	 */
-	private Pattern pFileStart=Pattern.compile("^PaintSaveFileVersion1.0$");
-	private Pattern pFileEnd=Pattern.compile("^\\s*E\\s*n\\s*d\\s*P\\s*a\\s*i\\s*n\\s*t\\s*S\\s*a\\s*v\\s*e\\s*F\\s*i\\s*l\\s*e\\s*$");
-	private Pattern pCircleStart=Pattern.compile("^EndPaintSaveFile$");
-	private Pattern pColor=Pattern.compile("^\\d{1,3},\\d{1,3},\\d{1,3}$");
-	private Pattern pRadius=Pattern.compile("://d+$");
-	private Pattern pFillTrue=Pattern.compile("true$");
-	private Pattern pFillFalse=Pattern.compile("false$");
-	private Pattern pCircleEnd=Pattern.compile("^EndCircle$");
-	private Pattern pRectangleStart=Pattern.compile("^\\s*R\\s*e\\s*c\\s*t\\s*a\\s*n\\s*g\\s*l\\s*e\\s*$");
-	private Pattern pRectangleEnd=Pattern.compile("^\\s*E\\s*n\\s*d\\s*R\\s*e\\s*c\\s*t\\s*a\\s*n\\s*g\\s*l\\s*e\\s*$");
-	private Pattern pSquiggle=Pattern.compile("^\\s*S\\s*q\\s*u\\s*i\\s*g\\s*g\\s*l\\s*e\\s*$");
-	private Pattern pSquiggleEnd=Pattern.compile("^\\s*E\\s*n\\s*d\\s*S\\s*q\\s*u\\s*i\\s*g\\s*g\\s*l\\s*e\\s*$");
+    /**
+     * Below are Patterns used in parsing
+     */
+    private Pattern pFileStart = Pattern.compile("^PaintSaveFileVersion1.0$");
+    private Pattern pFileEnd = Pattern.compile("^EndPaintSaveFile$");
+    private Pattern pCircleStart = Pattern.compile("^Circle$");
+    private Pattern pCircleEnd = Pattern.compile("^EndCircle$");
+    private Pattern pColor = Pattern.compile("(\\d{1,3},\\d{1,3},\\d{1,3})$");
+    private Pattern pRadius = Pattern.compile(":\\d+$");
+    private Pattern pCenter = Pattern.compile("\\d+,\\d+");
+    private Pattern pFill = Pattern.compile("(false|true)$$");
+    private Pattern pRectangleStart = Pattern.compile("^Rectangle$");
+    private Pattern pRectangleEnd = Pattern.compile("^EndRectangle$");
+    private Pattern pSquiggle = Pattern.compile("^Squiggle$");
+    private Pattern pSquiggleEnd = Pattern.compile("^EndSquiggle$");
 
 
+    // ADD MORE!!
 
-	// ADD MORE!!
+    /**
+     * Store an appropriate error message in this, including
+     * lineNumber where the error occurred.
+     *
+     * @param mesg
+     */
+    private void error(String mesg) {
+        this.errorMessage = "Error in line " + lineNumber + " " + mesg;
+    }
 
-	/**
-	 * Store an appropriate error message in this, including
-	 * lineNumber where the error occurred.
-	 * @param mesg
-	 */
-	private void error(String mesg){
-		this.errorMessage = "Error in line "+lineNumber+" "+mesg;
-	}
+    /**
+     * @return the error message resulting from an unsuccessful parse
+     */
+    public String getErrorMessage() {
+        return this.errorMessage;
+    }
 
-	/**
-	 *
-	 * @return the error message resulting from an unsuccessful parse
-	 */
-	public String getErrorMessage(){
-		return this.errorMessage;
-	}
+    /**
+     * Parse the inputStream as a Paint Save File Format file.
+     * The result of the parse is stored as an ArrayList of Paint command.
+     * If the parse was not successful, this.errorMessage is appropriately
+     * set, with a useful error message.
+     *
+     * @param inputStream the open file to parse
+     * @param paintModel  the paint model to add the commands to
+     * @return whether the complete file was successfully parsed
+     */
+    public boolean parse(BufferedReader inputStream, PaintModel paintModel) {
+        this.paintModel = paintModel;
+        this.errorMessage = "";
 
-	/**
-	 * Parse the inputStream as a Paint Save File Format file.
-	 * The result of the parse is stored as an ArrayList of Paint command.
-	 * If the parse was not successful, this.errorMessage is appropriately
-	 * set, with a useful error message.
-	 *
-	 * @param inputStream the open file to parse
-	 * @param paintModel the paint model to add the commands to
-	 * @return whether the complete file was successfully parsed
-	 */
-	public boolean parse(BufferedReader inputStream, PaintModel paintModel) {
-		this.paintModel = paintModel;
-		this.errorMessage="";
+        // During the parse, we will be building one of the
+        // following commands. As we parse the file, we modify
+        // the appropriate command.
 
-		// During the parse, we will be building one of the
-		// following commands. As we parse the file, we modify
-		// the appropriate command.
+        CircleCommand circleCommand = null;
+        RectangleCommand rectangleCommand = null;
+        SquiggleCommand squiggleCommand = null;
 
-		CircleCommand circleCommand = null;
-		RectangleCommand rectangleCommand = null;
-		SquiggleCommand squiggleCommand = null;
+        try {
+            int state = 0;
+            Matcher m;
+            String l;
 
-		try {
-			int state=0; Matcher m; String l;
-
-			this.lineNumber=0;
-			while ((l = inputStream.readLine()) != null) {
-				this.lineNumber++;
-				l = l.replaceAll(\\s+,"");
-				System.out.println(lineNumber+" "+l+" "+state);
-				switch(state){
-					case 0:
-						m=pFileStart.matcher(l);
-                        if(m.matches()){
-							state=1;
-							break;
-						}
-						else if("".equals(l)) {
-                            state = 0;
+            this.lineNumber = 0;
+            while ((l = inputStream.readLine().replaceAll("\\s+", "")) != null) {
+                this.lineNumber++;
+                System.out.println(lineNumber + " " + l + " " + state);
+                switch (state) {
+                    case 0:
+                        m = pFileStart.matcher(l);
+                        if (m.matches()) {
+                            state = 1;
                             break;
                         }
                         error("Expected Start of Paint Save File");
-						return false;
-					case 1: // Looking for the start of a new object or end of the save file
-						m=pCircleStart.matcher(l);
-						if(m.matches()){
-							// ADD CODE!!!
-                            state = 3;
-                            paintModel.addCommand(CircleCommand);
-                            m=pColor.matcher(l);
-                            if (m.matches()) {String c = inputStream.readLine();}
-
-                            while ((inputStream.readLine().toString().equals("EndCircle\n"));
-                            {
-								String r = inputStream.readLine();
-							}
+                        return false;
+                    case 1: // Looking for the start of a new object or end of the save file
+                        m = pCircleStart.matcher(l);
+                        if (m.matches()) {
+                            state = 2;
                             break;
-						}m=pFileEnd.matcher(l);
-						if(m.matches()) {
+                        }m = pRectangleStart.matcher(l);
+                        if (m.matches()){
+                            state=3;
+                            break;
+                        }m=pSquiggle.matcher(l);
+                        if (m.matches()){
+                            state=4;
+                        }
+                        m = pFileEnd.matcher(l);
+                        if (m.matches()) {
                             return true;
+                        } else if (!m.matches()) {
+                            return  false;
+
+                        }
+                        break;
+
+                        //paintModel.addCommand(circleCommand);
+
+                    case 2:
+                        // ADD CODE
+                        m = pColor.matcher(l);
+                        if (m.find()) {
+                            String[] colors = m.group(1).split("\\W");
+                            circleCommand.setColor(Integer.valueOf(colors[0]), Integer.valueOf(colors[1]), Integer.valueOf(colors[2]));
+                            System.out.println();
+                            break;
+                        }
+                        m=pFill.matcher(l);
+                        if (m.find()) {
+                            System.out.println("Fill has been set");
+                            circleCommand.setFill(Boolean.parseBoolean(m.group(1)));
+                            break;
+                        }
+                        m = pCenter.matcher(l);
+                        if (m.find()) {
+                            System.out.println("Fill has been set");
+                            String[] coordinates = m.group(1).split(",");
+                            circleCommand.setCentre(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
+                            break;
+                        }
+                        m = pRadius.matcher(l);
+                        if (m.find()) {
+                            System.out.println("Fill has been set");
+                            circleCommand.setRadius(Integer.parseInt(m.group(1)));
+                            break;
                         }
 
-					case 2:
-						// ADD CODE
-						m=pCircleEnd.matcher(l);
-						if (m.matches()) {
-							state=1;
-							break;
-						}
-
-					case 3:
-						m=pRectangleStart.matcher(l);
-						if(m.matches()){
-							// ADD CODE!!!
+                    case 3:
+                        m = pRectangleStart.matcher(l);
+                        if (m.matches()) {
+                            // ADD CODE!!!
                             System.out.println("It's a start of a circle get ready bois");
-                            state=4;
-							break;
-						}m=pRectangleEnd.matcher(l);
-						if (m.matches()) {
-							state=1;
-							break;
-						}
-					case 4:
-						m=pSquiggle.matcher(l);
-						if(m.matches()){
-							// ADD CODE!!!
-							state=5;
-							break;
-						}m=pSquiggleEnd.matcher(l);
-						if (m.matches()) {
-							state=1;
-							break;
-						}
-					case 5:
-						error("We were expecting a new shape object but found none ");
-				}
-				}
-			}catch (Exception e){
+                            state = 4;
+                            break;
+                        }
+                        m = pRectangleEnd.matcher(l);
+                        if (m.matches()) {
+                            state = 1;
+                            break;
+                        }
+                    case 4:
+                        m = pSquiggle.matcher(l);
+                        if (m.matches()) {
+                            // ADD CODE!!!
+                            state = 5;
+                            break;
+                        }
+                        m = pSquiggleEnd.matcher(l);
+                        if (m.matches()) {
+                            state = 1;
+                            break;
+                        }
+                    case 5:
+                        error("We were expecting a new shape object but found none ");
+                        return true;
+                }
+            }
+        } catch (Exception e) {
             error("We got a error");
         }
-
-		return true;
-	}
+        System.out.println("Done");
+        return true;
+    }
 }
