@@ -104,14 +104,18 @@ public class PaintFileParser {
                         if (m.matches()) {
                             state = 2;
                             break;
+                    case 2:
                         }m = pRectangleStart.matcher(l);
                         if (m.matches()){
                             state=3;
                             break;
-                        }m=pSquiggle.matcher(l);
+                        }
+                    case 3:
+                        m=pSquiggle.matcher(l);
                         if (m.matches()){
                             state=4;
                         }
+                    case 4:
                         m = pFileEnd.matcher(l);
                         if (m.matches()) {
                             return true;
@@ -119,9 +123,9 @@ public class PaintFileParser {
                             return  false;
 
                         }
-                        break;
 
-                    case 2:
+
+                    case 5:
                         // ADD CODE
                         m = pColor.matcher(l);
                         if (m.find()) {
@@ -131,14 +135,14 @@ public class PaintFileParser {
                             break;
                         }
 
-                    case 3:
+                    case 6:
                         m=pFill.matcher(l);
                         if (m.find()) {
                             System.out.println("Fill has been set");
                             circleCommand.setFill(Boolean.parseBoolean(m.group(1)));
                             break;
                         }
-                    case 4:
+                    case 7:
                         m = pCenter.matcher(l);
                         if (m.find()) {
                             System.out.println("Fill has been set");
@@ -146,7 +150,7 @@ public class PaintFileParser {
                             circleCommand.setCentre(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
                             break;
                         }
-                    case 5:
+                    case 8:
                         m = pRadius.matcher(l);
                         if (m.find()) {
                             System.out.println("Fill has been set");
@@ -154,7 +158,7 @@ public class PaintFileParser {
                             break;
                         }
 
-                    case 6:
+                    case 9:
                         m = pRectangleStart.matcher(l);
                         if (m.matches()) {
                             // ADD CODE!!!
@@ -162,26 +166,26 @@ public class PaintFileParser {
                             state = 4;
                             break;
                         }
-                    case 7:
+                    case 10:
                         m = pRectangleEnd.matcher(l);
                         if (m.matches()) {
                             state = 1;
                             break;
                         }
-                    case 8:
+                    case 11:
                         m = pSquiggle.matcher(l);
                         if (m.matches()) {
                             // ADD CODE!!!
                             state = 5;
                             break;
                         }
-                    case 9:
+                    case 12:
                         m = pSquiggleEnd.matcher(l);
                         if (m.matches()) {
                             state = 1;
                             break;
                         }
-                    case 10:
+                    case 13:
                         error("We were expecting a new shape object but found none ");
                         return true;
                 }
