@@ -1,6 +1,7 @@
 package ca.utoronto.utm.paint;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -126,7 +127,11 @@ public class View implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		System.out.println(((MenuItem) event.getSource()).getText());
+	    ArrayList<String> shapes = new ArrayList<>();
+        System.out.println(((MenuItem) event.getSource()).getText());
+		String shape = ((MenuItem) event.getSource()).getText();
+		shapes.add(shape);
+		System.out.println(shape);
 		String command = ((MenuItem) event.getSource()).getText();
 		if (command.equals("Open")) {
 			FileChooser fc = new FileChooser();
@@ -150,18 +155,27 @@ public class View implements EventHandler<ActionEvent> {
 		} else if (command.equals("Save")) {
 			FileChooser fc = new FileChooser();
 			File file = fc.showSaveDialog(this.stage);
-
 			if (file != null) {
 				// This is where a real application would open the file.
 				System.out.println("Saving: " + file.getName() + "." + "\n");
 				// Add something like the following...
-				// PrintWriter writer = new PrintWriter(file);
-				// View.save(writer, this.paintModel);
+				PrintWriter writer = null;
+				try {
+					writer = new PrintWriter(file + ".txt", "UTF-8");
+
+                } catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+                    e.printStackTrace();
+                }
+                View.save(writer, this.paintModel, shapes);
 			} else {
 				System.out.println("Save command cancelled by user." + "\n");
 			}
 		} else if (command.equals("New")) {
-			// this.paintModel.reset();
+			this.paintModel.reset();
 			this.setPaintModel(new PaintModel());
 		}	
 	}
@@ -171,7 +185,10 @@ public class View implements EventHandler<ActionEvent> {
 	 * @param writer
 	 * @param paintModel
 	 */
-	public static void save(PrintWriter writer, PaintModel paintModel) {
-		
+	public static void save(PrintWriter writer, PaintModel paintModel, ArrayList<String> shapes) {
+		writer.println("Paint Save File Version 1.0");
+		paintModel.save(writer, shapes);
+
+
 	}
 }

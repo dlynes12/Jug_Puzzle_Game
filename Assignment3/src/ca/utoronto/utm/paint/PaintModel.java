@@ -9,7 +9,15 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class PaintModel extends Observable implements Observer {
 
-	public void save(PrintWriter writer) {
+	public void save(PrintWriter writer, ArrayList<String> shapes) {
+	    Integer i=0;
+	    for (PaintCommand  c : this.commands) {
+	        writer.println(shapes.get(i));
+	        i++;
+	        writer.println(c.toString());
+        }
+        writer.println("End Paint Save File");
+        writer.close();
 		
 	}
 	public void reset(){
