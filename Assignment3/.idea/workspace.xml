@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="357ad3d3-b217-45fa-86ef-c0fc83f9f53d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ca/utoronto/utm/paint/PaintFileParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/utoronto/utm/paint/PaintFileParser.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -246,7 +245,7 @@
     <property name="SearchEverywhereHistoryKey" value="GraphicsCont&#9;PSI&#9;JAVA://ca.utoronto.utm.paint.PaintFileParser#graphicsContext&#10;circleComman&#9;PSI&#9;JAVA://ca.utoronto.utm.paint.PaintModel#CircleCommand" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544072133525" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544072214330" />
     <property name="last.edited.regexp" value="    " />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -374,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544070348024</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Finished up cases for the reading and parsing of the files">
+      <created>1544072144213</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1544072144213</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -383,7 +389,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81321000" />
+    <option name="totallyTimeSpent" value="81400000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
