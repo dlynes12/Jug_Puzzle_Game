@@ -28,6 +28,12 @@ public class RectangleCommand extends PaintCommand {
 		this.setChanged();
 		this.notifyObservers();
 	}
+	public String toString(){
+		String s= super.toString();
+		s+="\tp1:("+this.p1.x+","+this.p1.y+")\n";
+		s+="\tp2:("+this.p2.x+","+this.p2.y+")\n";
+		return s;
+	}
 
 	public Point getTopLeft(){
 		return new Point(Math.min(p1.x, p2.x), Math.min(p1.y, p2.y));

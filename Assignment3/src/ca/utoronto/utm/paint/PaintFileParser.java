@@ -33,7 +33,7 @@ public class PaintFileParser {
     private Pattern pColor = Pattern.compile("(\\d{1,3},\\d{1,3},\\d{1,3})$");
     private Pattern pRadius = Pattern.compile(":\\d+$");
     private Pattern pCenter = Pattern.compile("\\d+,\\d+");
-    private Pattern pFill = Pattern.compile("(false|true)$$");
+    private Pattern pFill = Pattern.compile("(false|true)$");
     private Pattern pRectangleStart = Pattern.compile("^Rectangle$");
     private Pattern pRectangleEnd = Pattern.compile("^EndRectangle$");
     private Pattern pSquiggle = Pattern.compile("^Squiggle$");
@@ -104,8 +104,9 @@ public class PaintFileParser {
                         if (m.matches()) {
                             state = 2;
                             break;
+                        }
                     case 2:
-                        }m = pRectangleStart.matcher(l);
+                        m = pRectangleStart.matcher(l);
                         if (m.matches()){
                             state=3;
                             break;

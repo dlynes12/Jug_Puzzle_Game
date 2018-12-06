@@ -15,6 +15,7 @@ class CircleManipulatorStrategy extends ShapeManipulatorStrategy {
 		
 		int radius = (int)Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
 		this.circleCommand.setRadius(radius);
+
 	}
 
 	@Override

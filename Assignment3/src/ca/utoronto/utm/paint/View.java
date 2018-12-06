@@ -123,20 +123,15 @@ public class View implements EventHandler<ActionEvent> {
 
 	public void setPaintPanelShapeManipulatorStrategy(ShapeManipulatorStrategy strategy) {
 		this.paintPanel.setShapeManipulatorStrategy(strategy);
-	}
+        }
 
 	@Override
 	public void handle(ActionEvent event) {
-	    ArrayList<String> shapes = new ArrayList<>();
         System.out.println(((MenuItem) event.getSource()).getText());
-		String shape = ((MenuItem) event.getSource()).getText();
-		shapes.add(shape);
-		System.out.println(shape);
 		String command = ((MenuItem) event.getSource()).getText();
 		if (command.equals("Open")) {
 			FileChooser fc = new FileChooser();
 			File file = fc.showOpenDialog(this.stage);
-
 			if (file != null) {
 				System.out.println("Opening: " + file.getName() + "." + "\n");
                 BufferedReader bufferedReader= null;
@@ -158,7 +153,6 @@ public class View implements EventHandler<ActionEvent> {
 			if (file != null) {
 				// This is where a real application would open the file.
 				System.out.println("Saving: " + file.getName() + "." + "\n");
-				// Add something like the following...
 				PrintWriter writer = null;
 				try {
 					writer = new PrintWriter(file + ".txt", "UTF-8");
@@ -170,7 +164,7 @@ public class View implements EventHandler<ActionEvent> {
 				} catch (IOException e) {
                     e.printStackTrace();
                 }
-                View.save(writer, this.paintModel, shapes);
+                View.save(writer, this.paintModel);
 			} else {
 				System.out.println("Save command cancelled by user." + "\n");
 			}
@@ -182,13 +176,14 @@ public class View implements EventHandler<ActionEvent> {
 	
 	/**
 	 * Save the given paintModel to the open file
-	 * @param writer
-	 * @param paintModel
-	 */
-	public static void save(PrintWriter writer, PaintModel paintModel, ArrayList<String> shapes) {
+     * @param writer
+     * @param paintModel
+     */
+	public static void save(PrintWriter writer, PaintModel paintModel) {
 		writer.println("Paint Save File Version 1.0");
-		paintModel.save(writer, shapes);
-
+		paintModel.save(writer);
+        writer.println("End Paint Save File");
+        writer.close();
 
 	}
 }

@@ -6,7 +6,8 @@ import javafx.scene.paint.Color;
 public abstract class PaintCommand extends Observable {
 	private Color color;
 	private boolean fill;
-	
+
+
 	PaintCommand(){
 		// Pick a random color for this
 		int r = (int)(Math.random()*256);
@@ -15,6 +16,7 @@ public abstract class PaintCommand extends Observable {
 		this.color = Color.rgb(r, g, b);
 		
 		this.fill = (1==(int)(Math.random()*2));
+
 	}
 	public Color getColor() {
 		return color;
@@ -33,9 +35,9 @@ public abstract class PaintCommand extends Observable {
 		this.fill = fill;
 	}
 	public String toString(){
-		double r =  (int)(this.color.getRed()*100);
-		double g = (int) (this.color.getGreen()*100);
-		double b = (int) (this.color.getBlue()*100);
+		int r =  (int)(this.color.getRed()*100);
+		int g = (int) (this.color.getGreen()*100);
+		int b = (int) (this.color.getBlue()*100);
 
 		String s = "";
 		s+="\tcolor:"+r+","+g+","+b+"\n";

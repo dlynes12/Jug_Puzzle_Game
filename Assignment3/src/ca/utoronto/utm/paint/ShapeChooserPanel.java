@@ -3,15 +3,22 @@ package ca.utoronto.utm.paint;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
+import java.util.ArrayList;
 
 public class ShapeChooserPanel extends GridPane implements EventHandler<ActionEvent> {
 
 	private View view; // So we can talk to our parent or other components of the view
+	public ArrayList<String> commands = new ArrayList<String>();
+	public String command;
+	private int radius;
 
 	public ShapeChooserPanel(View view) {
 
 		this.view = view;
+
 
 		String[] buttonLabels = { "Circle", "Rectangle", "Squiggle" };
 
@@ -27,8 +34,12 @@ public class ShapeChooserPanel extends GridPane implements EventHandler<ActionEv
 
 	@Override
 	public void handle(ActionEvent event) {
-		String command = ((Button) event.getSource()).getText();
+		this.command = (((Button) event.getSource()).getText());
+		this.commands.add(this.command);
 		this.view.setPaintPanelShapeManipulatorStrategy(ShapeManipulatorFactory.create(command, view.getPaintModel()));
-		System.out.println(command);
+		PaintPanel n = view.getPaintPanel();
+		System.out.println(this.command);
+
 	}
+
 }
