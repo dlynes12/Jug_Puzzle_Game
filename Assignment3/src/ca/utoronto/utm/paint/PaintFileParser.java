@@ -1,9 +1,11 @@
 package ca.utoronto.utm.paint;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /**
@@ -36,12 +38,18 @@ public class PaintFileParser {
     private Pattern pFill = Pattern.compile("(false|true)$");
     private Pattern pRectangleStart = Pattern.compile("^Rectangle$");
     private Pattern pRectangleEnd = Pattern.compile("^EndRectangle$");
-    private Pattern pSquiggle = Pattern.compile("^Squiggle$");
+    private Pattern pSquiggleStart = Pattern.compile("^Squiggle$");
     private Pattern pSquiggleEnd = Pattern.compile("^EndSquiggle$");
+    private Pattern pPoints = Pattern.compile("(\\d+,\\d+)");
+    private Pattern pSquigglePointStart = Pattern.compile("points$");
+    private Pattern pSquigglePointEnd = Pattern.compile("end points$");
+    private Pattern pSquigglePoints = Pattern.compile("(\\d+,\\d+)");
+
 
 
     // ADD MORE!!
 
+    GraphicsContext g;
     /**
      * Store an appropriate error message in this, including
      * lineNumber where the error occurred.
@@ -102,20 +110,26 @@ public class PaintFileParser {
                     case 1: // Looking for the start of a new object or end of the save file
                         m = pCircleStart.matcher(l);
                         if (m.matches()) {
-                            state = 2;
+                            state = 5;
                             break;
                         }
+                        state = 2;
+                        break;
                     case 2:
                         m = pRectangleStart.matcher(l);
                         if (m.matches()){
-                            state=3;
+                            state=5;
                             break;
                         }
+                        state = 3;
+                        break;
                     case 3:
-                        m=pSquiggle.matcher(l);
+                        m=pSquiggleStart.matcher(l);
                         if (m.matches()){
-                            state=4;
+                            state=5;
                         }
+                        state = 4;
+                        break;
                     case 4:
                         m = pFileEnd.matcher(l);
                         if (m.matches()) {
@@ -125,70 +139,147 @@ public class PaintFileParser {
 
                         }
 
-
                     case 5:
-                        // ADD CODE
+                        // Circle one
                         m = pColor.matcher(l);
                         if (m.find()) {
                             String[] colors = m.group(1).split("\\W");
-                            circleCommand.setColor(Integer.valueOf(colors[0]), Integer.valueOf(colors[1]), Integer.valueOf(colors[2]));
-                            System.out.println();
+                           circleCommand.setColor(Integer.valueOf(colors[0]), Integer.valueOf(colors[1]), Integer.valueOf(colors[2]));
+                            state=6;
                             break;
                         }
+                        return false;
 
                     case 6:
                         m=pFill.matcher(l);
                         if (m.find()) {
-                            System.out.println("Fill has been set");
                             circleCommand.setFill(Boolean.parseBoolean(m.group(1)));
+                            state=11;
                             break;
                         }
                     case 7:
-                        m = pCenter.matcher(l);
+                    // Rectangle one
+                    m = pColor.matcher(l);
+                    if (m.find()) {
+                        String[] colors = m.group(1).split("\\W");
+                        circleCommand.setColor(Integer.valueOf(colors[0]), Integer.valueOf(colors[1]), Integer.valueOf(colors[2]));
+                        state=8;
+                        break;
+                        }
+                        return false;
+
+                    case 8:
+                        m=pFill.matcher(l);
                         if (m.find()) {
-                            System.out.println("Fill has been set");
-                            String[] coordinates = m.group(1).split(",");
-                            circleCommand.setCentre(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
+                            circleCommand.setFill(Boolean.parseBoolean(m.group(1)));
+                            state=16;
                             break;
                         }
-                    case 8:
-                        m = pRadius.matcher(l);
+                    case 9:
+                    // Squiggle one
+                    m = pColor.matcher(l);
+                    if (m.find()) {
+                        String[] colors = m.group(1).split("\\W");
+                        circleCommand.setColor(Integer.valueOf(colors[0]), Integer.valueOf(colors[1]), Integer.valueOf(colors[2]));
+                        state=10;
+                        break;
+                    }
+                    return false;
+
+                    case 10:
+                        m=pFill.matcher(l);
                         if (m.find()) {
-                            System.out.println("Fill has been set");
-                            circleCommand.setRadius(Integer.parseInt(m.group(1)));
+                            circleCommand.setFill(Boolean.parseBoolean(m.group(1)));
+                            state=18;
                             break;
                         }
 
-                    case 9:
-                        m = pRectangleStart.matcher(l);
-                        if (m.matches()) {
-                            // ADD CODE!!!
-                            System.out.println("It's a start of a circle get ready bois");
-                            state = 4;
-                            break;
-                        }
-                    case 10:
-                        m = pRectangleEnd.matcher(l);
-                        if (m.matches()) {
-                            state = 1;
-                            break;
-                        }
                     case 11:
-                        m = pSquiggle.matcher(l);
-                        if (m.matches()) {
-                            // ADD CODE!!!
-                            state = 5;
+                        m = pCenter.matcher(l);
+                        if (m.find()) {
+                            String[] coordinates = m.group(1).split(",");
+                            circleCommand.setCentre(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
+                            state=12;
                             break;
                         }
                     case 12:
-                        m = pSquiggleEnd.matcher(l);
+                        m = pRadius.matcher(l);
+                        if (m.find()) {
+                            circleCommand.setRadius(Integer.parseInt(m.group(1)));
+                            state=15;
+                            break;
+                        }
+
+                    case 13:
+                        m = pRectangleEnd.matcher(l);
                         if (m.matches()) {
+                            circleCommand.execute(g);
                             state = 1;
                             break;
                         }
-                    case 13:
-                        error("We were expecting a new shape object but found none ");
-                        return true;
+                    case 14:
+                        m = pSquiggleEnd.matcher(l);
+                        if (m.matches()) {
+                            squiggleCommand.execute(g);
+                            state = 1;
+                            break;
+                        }
+                    case 15:
+                        m = pCircleEnd.matcher(l);
+                        if (m.matches()){
+                            circleCommand.execute(g);
+                            state = 1;
+                            break;
+                        }
+                    case 16:
+                        //p1 for rectangle
+                        m=pPoints.matcher(l);
+                        if (m.matches()){
+                            String[] points = m.group(1).split(",");
+                            Point p1 = new Point(Integer.parseInt(points[0]), Integer.parseInt(points[1]));
+                            rectangleCommand.setP1(p1);
+                            state=17;
+                            break;
+                        }
+                    case 17:
+                        //p2 for rectangle
+                        m=pPoints.matcher(l);
+                        if (m.matches()) {
+                            String[] points2 = m.group(1).split(",");
+                            Point p2 = new Point(Integer.parseInt(points2[0]), Integer.parseInt(points2[1]));
+                            rectangleCommand.setP2(p2);
+                            state = 13;
+                            break;
+                        }
+                    case 18:
+                        //Initial point part of Squiggle EX. points
+                        m=pSquigglePointStart.matcher(l);
+                        if (m.matches()){
+                            state=19;
+                            break;
+                        }
+                    case 19://The rest of the following points for squiggle
+                        m=pSquigglePoints.matcher(l);
+                        if (m.matches()) {
+                            String[] sqp = m.group(1).split(",");
+                            Point p = new Point(Integer.parseInt(sqp[0]), Integer.parseInt(sqp[1]));
+                            squiggleCommand.add(p);
+                            state = 19;
+                            break;
+                        }
+                        state=20;
+                        break;
+
+                    case 20:
+                        //The End of the points for squiggle
+                        m=pSquigglePointEnd.matcher(l);
+                        if (m.matches()) {
+                            state = 14;
+                            break;
+                        }
+                        return false;
+
+
                 }
             }
         } catch (Exception e) {
