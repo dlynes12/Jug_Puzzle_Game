@@ -57,15 +57,16 @@ public class PaintFileParser {
      * @param mesg
      */
     private void error(String mesg) {
-        this.errorMessage = "Error in line " + lineNumber + " " + mesg;
+        this.errorMessage = "Error in line " + lineNumber + " " + mesg + "\n";
+        System.out.println(getErrorMessage());
     }
-
     /**
      * @return the error message resulting from an unsuccessful parse
      */
     public String getErrorMessage() {
         return this.errorMessage;
     }
+
 
     /**
      * Parse the inputStream as a Paint Save File Format file.
@@ -110,8 +111,7 @@ public class PaintFileParser {
                     case 1: // Looking for the start of a new object or end of the save file
                         m = pCircleStart.matcher(l);
                         if (m.matches()) {
-                            Point p = new Point(0,0);
-                            circleCommand = new CircleCommand(p, 0);
+                            circleCommand = new CircleCommand(null, 0);
                             state = 5;
                             break;
                         }
@@ -120,8 +120,7 @@ public class PaintFileParser {
                     case 2:
                         m = pRectangleStart.matcher(l);
                         if (m.matches()){
-                            Point p = new Point(0,0);
-                            rectangleCommand = new RectangleCommand(p,p);
+                            rectangleCommand = new RectangleCommand(null,null);
                             state=7;
                             break;
                         }
@@ -186,7 +185,7 @@ public class PaintFileParser {
                     m = pColor.matcher(l);
                     if (m.find()) {
                         String[] colors = m.group(1).split("\\W");
-                        circleCommand.setColor(Integer.valueOf(colors[0]), Integer.valueOf(colors[1]), Integer.valueOf(colors[2]));
+                        squiggleCommand.setColor(Integer.valueOf(colors[0]), Integer.valueOf(colors[1]), Integer.valueOf(colors[2]));
                         state=10;
                         break;
                     }
@@ -201,13 +200,18 @@ public class PaintFileParser {
                         }
 
                     case 11:
+
                         m = pCenter.matcher(l);
+                        System.out.println(l);
+                        System.out.println(m.group(1));
+
+                        System.out.println();
+
                         if (m.find()) {
                             String[] coordinates = m.group(1).split(",");
+                            System.out.println(coordinates.toString());
                             Point p = new Point(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]));
-                            CircleCommand c = new CircleCommand(p,0);
-                            c.setColor(circleCommand.getColor());c.setFill(circleCommand.isFill());
-                            circleCommand = c;
+                            circleCommand.setCentre(p);
                             state=12;
                             break;
                         }
