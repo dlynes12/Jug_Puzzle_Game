@@ -32,18 +32,24 @@ public class PaintFileParser {
     private Pattern pFileEnd = Pattern.compile("^EndPaintSaveFile$");
     private Pattern pCircleStart = Pattern.compile("^Circle$");
     private Pattern pCircleEnd = Pattern.compile("^EndCircle$");
-    private Pattern pColor = Pattern.compile("(\\d{1,3},\\d{1,3},\\d{1,3})$");
-    private Pattern pRadius = Pattern.compile(":\\d+$");
-    private Pattern pCenter = Pattern.compile("\\d+,\\d+");
-    private Pattern pFill = Pattern.compile("(false|true)$");
     private Pattern pRectangleStart = Pattern.compile("^Rectangle$");
     private Pattern pRectangleEnd = Pattern.compile("^EndRectangle$");
     private Pattern pSquiggleStart = Pattern.compile("^Squiggle$");
     private Pattern pSquiggleEnd = Pattern.compile("^EndSquiggle$");
-    private Pattern pPoints = Pattern.compile("(\\d+,\\d+)");
     private Pattern pSquigglePointStart = Pattern.compile("points$");
     private Pattern pSquigglePointEnd = Pattern.compile("end points$");
-    private Pattern pSquigglePoints = Pattern.compile("(\\d+,\\d+)");
+    private Pattern pColor = Pattern.compile("^\\tcolor:(\\d{1,3},\\d{1,3},\\d{1,3})$");
+    private Pattern pFill =Pattern.compile("^\\tfilled:(false|true)$");
+    private Pattern pRadius =Pattern.compile("^\\tradius:\\d+$");
+    private Pattern pCenter =Pattern.compile("^\\tcenter:\\d+,\\d+$");
+
+    // Patterns below are used to find and match to extract specific data
+    private Pattern pColorFind = Pattern.compile("(\\d{1,3},\\d{1,3},\\d{1,3})$");
+    private Pattern pRadiusFind = Pattern.compile(":\\d+$");
+    private Pattern pCenterFind = Pattern.compile("\\d+,\\d+");
+    private Pattern pFillFind = Pattern.compile("(false|true)$");
+    private Pattern pPointsFind = Pattern.compile("(\\d+,\\d+)");
+
 
 
 
