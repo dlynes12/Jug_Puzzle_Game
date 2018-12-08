@@ -73,11 +73,11 @@ Dec 5, 2017
 
 Dec 6, 2017
 	Yesterday :
-	Today     :
+	Today     :Finished up read parse
 	Obstacles :
 	
 Dec 7, 2017
 	Yesterday :
-	Today     :
+	Today     :FInished all of my work and tried to complete IEEE754
 	Obstacles :
 	
