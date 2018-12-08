@@ -104,22 +104,34 @@ public class IEEE754Single {
 	// Return information about the representation of floating point number d
 	public static String binRep(float d) {
 		// FIX THIS CODE
-		/*
-		 * See Float.floatToRawIntBits
-		 */
+
 
 		int l = Float.floatToRawIntBits(d); // Use this to pull bits of d
-		int sign = 0;
-		int exponent = 0; 
+		String binary = Integer.toBinaryString(l);// Turn int l into binary form
+		Integer sign=0;
+		while (binary.length() < 31) {
+			binary = "0" + binary;
+		}
+		int exponent = 0;
 		int mantissa = 0;
 		String sSign = "";
 		String sExponent = "";
+		String fr="";
 		String sMantissa = "";
+		if (binary.length()<0){sign=1;
+		binary = String.valueOf(sign)+ binary;}
+		binary = String.valueOf(sign)+ binary;
+		sSign += String.valueOf(sign);
+		sExponent += binary.substring(1, 9);
+		sMantissa += binary.substring(9, 31);
 		String s = sSign + "[" + sExponent + "]" + sMantissa;
 		String t = (sign == 0) ? "+" : "-";
 
-		int trueExponent = 0;
-		
+		int trueExponent = (Integer.parseInt(sExponent,2)-127);
+		if (-127 == trueExponent && d!=0.0f){trueExponent=-126; }
+		else if (trueExponent == -127 && d == 0.0f){trueExponent=0;}
+		if(sExponent.equals("00000000")){fr+="0.";}else {fr+="1.";}
+
 		t = t + sMantissa + "x2^(" + trueExponent + ")";
 		return (s + "=" + t + "=" + d);
 	}
