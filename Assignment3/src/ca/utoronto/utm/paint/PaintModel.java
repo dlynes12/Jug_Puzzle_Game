@@ -18,12 +18,11 @@ public class PaintModel extends Observable implements Observer {
 	    Integer i=0;
         ArrayList<String> shapes = new ArrayList<String>();
 
-        for (PaintCommand cm : this.commands) {
-            if (cm.getClass().isInstance(circleCommand)){shapes.add("Circle");shapes.add("EndCircle");}
-            if (cm.getClass().isInstance(rectangleCommand)){shapes.add("Rectangle");shapes.add("EndRectangle");}
-            if (cm.getClass().isInstance(squiggleCommand)){shapes.add("Squiggle");shapes.add("EndSquiggle");}
-            ArrayList<String> instr = new ArrayList<String>();
-            String[] temp = cm.toString().split("\n");
+        for (PaintCommand com : this.commands) {
+            if (com.getClass().isInstance(circleCommand)){shapes.add("Circle");shapes.add("EndCircle");}
+            if (com.getClass().isInstance(rectangleCommand)){shapes.add("Rectangle");shapes.add("EndRectangle");}
+            if (com.getClass().isInstance(squiggleCommand)){shapes.add("Squiggle");shapes.add("EndSquiggle");}
+            String[] temp = com.toString().split("\n");
             if (i < shapes.size()) {
                 writer.println(shapes.get(i));
                 for (String c : temp) {

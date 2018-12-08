@@ -182,8 +182,7 @@ public class View implements EventHandler<ActionEvent> {
 	public static void save(PrintWriter writer, PaintModel paintModel) {
 		writer.println("Paint Save File Version 1.0");
 		paintModel.save(writer);
-        writer.println("End Paint Save File");
-        writer.close();
+
 
 	}
 }

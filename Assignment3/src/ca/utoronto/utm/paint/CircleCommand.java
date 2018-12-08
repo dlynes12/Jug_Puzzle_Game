@@ -25,7 +25,7 @@ public class CircleCommand extends PaintCommand {
 	}
     public String toString(){
 	    String s= super.toString();
-        s+="\tCenter:("+this.centre.x+","+this.centre.y+")\n";
+        s+="\tcenter:("+this.centre.x+","+this.centre.y+")\n";
         s+="\tradius:"+this.radius+"\n";
         return s;
     }
