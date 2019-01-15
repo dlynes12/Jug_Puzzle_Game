@@ -1,0 +1,33 @@
+We compiled and ran on the command line ... the file redirects
+on the right were not commented out in our scripts. So you can see where
+the associated files came from.
+
+# Making sure Paint compiles
+javac -nowarn ca/utoronto/utm/paint/Paint.java                          #2>$OUTPUTDIR/javac.errors
+# After this, we ran a tool that extracts the class definitions.
+# You can find them in the .definition files in your repo.
+
+# Testing Saving (1.1)
+javac -nowarn ca/utoronto/utm/paint/TestSave.java                       #2>$OUTPUTDIR/javac_test_save.errors
+java ca/utoronto/utm/paint/TestSave                                     #1>/dev/null 2>$OUTPUTDIR/test_save.out
+
+# Testing the parser (1.2)
+javac -nowarn ca/utoronto/utm/paint/TestParse.java                      #2>$OUTPUTDIR/javac_test_parse.errors
+java ca/utoronto/utm/paint/TestParse                                    #1>/dev/null 2>$OUTPUTDIR/test_parse.out
+
+javac -nowarn ca/utoronto/utm/floatingpoint/IEEE754Single.java          #2>$OUTPUTDIR/javac.errors
+javac -nowarn ca/utoronto/utm/floatingpoint/FPErrors.java               #2>$OUTPUTDIR/javac.errors
+
+java ca/utoronto/utm/floatingpoint/IEEE754Single                        #1>$OUTPUTDIR/run.out 2>$OUTPUTDIR/run.errors
+java ca/utoronto/utm/floatingpoint/FPErrors                             #1>$OUTPUTDIR/run.out 2>$OUTPUTDIR/run.errors
+
+To see the extent of changes to your files you can do something
+like the following on Unix/Linux. Have not had a chance to check this yet.
+
+git diff COMMIT_ID_2 COMMIT_ID_2  # for the changes
+git diff COMMIT_ID_2 COMMIT_ID_2 | grep -e '^+' | wc # should be at most 10
+git diff COMMIT_ID_2 COMMIT_ID_2 | grep -e '^-' | wc # should be at most 10
+
+One last thing. In case someone is trying to game the resubmit. The 
+files must be relatively nicely indented and not too long. No removing
+a line and replacing it with a very very long line.

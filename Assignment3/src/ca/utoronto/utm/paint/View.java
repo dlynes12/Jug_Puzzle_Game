@@ -125,8 +125,7 @@ public class View implements EventHandler<ActionEvent> {
 		this.paintPanel.setShapeManipulatorStrategy(strategy);
         }
 
-	@Override
-	public void handle(ActionEvent event) {
+	public void handle(ActionEvent event)  {
         System.out.println(((MenuItem) event.getSource()).getText());
 		String command = ((MenuItem) event.getSource()).getText();
 		if (command.equals("Open")) {
@@ -155,16 +154,12 @@ public class View implements EventHandler<ActionEvent> {
 				System.out.println("Saving: " + file.getName() + "." + "\n");
 				PrintWriter writer = null;
 				try {
-					writer = new PrintWriter(file + ".txt", "UTF-8");
+					writer = new PrintWriter(file);
 
-                } catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-                    e.printStackTrace();
-                }
-                View.save(writer, this.paintModel);
+                } catch (FileNotFoundException  e) {
+					throw new RuntimeException(e);
+				}
+				View.save(writer, this.paintModel);
 			} else {
 				System.out.println("Save command cancelled by user." + "\n");
 			}

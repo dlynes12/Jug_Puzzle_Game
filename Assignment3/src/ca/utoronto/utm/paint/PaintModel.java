@@ -32,7 +32,7 @@ public class PaintModel extends Observable implements Observer {
             writer.println(shapes.get(i));
             i++;
             }
-            System.out.println(temp);
+            System.out.println(temp.toString());
 
         }
         writer.println("End Paint Save File");
