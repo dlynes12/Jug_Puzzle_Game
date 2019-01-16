@@ -1,8 +1,0 @@
-Paint Save File Version 1.0
-Rectangle
-    	color:14,7,63
-    	filled:false
-    	p1:(62,102)
-    	p2:(138,110)
-EndRectangle
-End Paint Save File
